@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
-const uri = "mongodb+srv://ifti891:Kalsi0810@cluster0.hnviy5s.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://<username>:<password>@cluster0.hnviy5s.mongodb.net/?retryWrites=true&w=majority";
 const app = express();
 
 
@@ -25,7 +25,7 @@ app.listen(3000, () => {
 //   })
 //   .catch(error => console.log(error))
 
-MongoClient.connect(uri, {useUnifiedTopology: true})
+MongoClient.connect(uri, { useUnifiedTopology: true })
   .then(client => {
     console.log("Connected to database")
     const db = client.db('star-wars-quotes')
@@ -41,10 +41,10 @@ MongoClient.connect(uri, {useUnifiedTopology: true})
 
 app.post('/quotes', (req, res) => {
   quotesCollection.insertOne(req.body)
-  .then(result => {
-    console.log(result)
-  })
-  .catch(error => console.error(error))
+    .then(result => {
+      console.log(result)
+    })
+    .catch(error => console.error(error))
 })
 
 app.get('/', (req, res) => {
