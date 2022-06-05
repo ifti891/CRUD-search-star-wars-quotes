@@ -1,56 +1,42 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require("body-parser")
 const MongoClient = require('mongodb').MongoClient
-const uri = "mongodb+srv://<username>:<password>@cluster0.hnviy5s.mongodb.net/?retryWrites=true&w=majority";
+
+const connectionString = "mongodb+srv://@cluster0.hnviy5s.mongodb.net/?retryWrites=true&w=majority";
 const app = express();
 
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.listen(3000, () => {
-  console.log("Listning on 3000")
-});
-
-// callback
-// MongoClient.connect(uri, { useUnifiedTopology: true }, (err, client) => {
-
-//   if (err)
-//     return console.error(err)
-//   console.log("Connected to the Database")
+//Callback method
+// MongoClient.connect(connectionString, (err, client) => {
+//   if (err) return console.error(err)
+//   console.log("Connected to Database");
 // })
 
-// Promise
-// MongoClient.connect(uri, { useUnifiedTopology: true })
-//   .then(client => {
-//     console.log('Connected to Database')
-//   })
-//   .catch(error => console.log(error))
-
-MongoClient.connect(uri, { useUnifiedTopology: true })
+// use of Promise
+MongoClient.connect(connectionString, { useUnifiedTopology: true })
   .then(client => {
-    console.log("Connected to database")
-    const db = client.db('star-wars-quotes')
-    const quotesCollection = db.collection('quotes')
-
-    app.use(/* ... */)
-    app.get(/* ... */)
-    app.post(/* ... */)
-    app.listen(/* ... */)
+    console.log('Connected to Database')
   })
   .catch(error => console.error(error))
 
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.post('/quotes', (req, res) => {
-  quotesCollection.insertOne(req.body)
-    .then(result => {
-      console.log(result)
-    })
-    .catch(error => console.error(error))
-})
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+app.listen(3000, () => {
+  console.log('listening on 3000')
 });
 
+// app.get('/', function (req, res) {
+//   res.send('Hello World')
+// })
 
+
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html')
+})
+
+app.post('/quotes', (req, res) => {
+  console.log(req.body)
+})
 
 
