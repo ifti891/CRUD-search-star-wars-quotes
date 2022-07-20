@@ -1,11 +1,12 @@
 {
   "name": "crud-express-mongo",
   "version": "1.0.0",
-  "description": "",
+  "description": "CRUD Backend implimented Yoda Quotes App. Search Yoda's quotes.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "iftikhar",
   "license": "ISC",
@@ -16,5 +17,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ifti891/CRUD-search-star-wars-quotes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ifti891/CRUD-search-star-wars-quotes/issues"
+  },
+  "homepage": "https://github.com/ifti891/CRUD-search-star-wars-quotes#readme"
 }
