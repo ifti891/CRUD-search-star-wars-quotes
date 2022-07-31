@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dve": "nodemon server.js"
   },
   "author": "iftikhar",
   "license": "ISC",
@@ -16,7 +17,7 @@
     "mongodb": "^4.6.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.19"
   },
   "repository": {
     "type": "git",
