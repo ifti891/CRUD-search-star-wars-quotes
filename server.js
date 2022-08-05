@@ -72,3 +72,4 @@ MongoClient.connect(myMongoDbUrl, {useUnifiedTopology: true})
   console.log("Connected to Database")
   const db = client.db("Star-wars-quotes")
 })
+
