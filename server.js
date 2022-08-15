@@ -1,3 +1,7 @@
+const express = require('express');
+const app = express();
+
+
 
 console.log("May Node be with you")
 
@@ -77,4 +81,3 @@ console.log("May Node be with you")
 //   console.log("Connected to Database")
 //   const db = client.db("Star-wars-quotes")
 // })
-
