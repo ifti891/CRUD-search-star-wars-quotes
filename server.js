@@ -1,7 +1,25 @@
+// requiring express in server.js
 const express = require('express');
 const app = express();
 
 
+// create a server that browser can connect. we do it by using Express 'listen' method
+
+app.listen(3000, function() {
+  console.log('listeing on 3000')
+})
+
+// In Express, we handle a GET request with the get method:
+
+/*
+app.get('/', function(req, res) {
+  res.send('Hello World');
+})
+*/
+
+app.get('/',(req, res) => {
+  res.sendFile(__dirname + '/index.html')
+})
 
 console.log("May Node be with you")
 
