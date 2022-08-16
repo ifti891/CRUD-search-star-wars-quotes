@@ -1,7 +1,16 @@
 // requiring express in server.js
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
+// const MongoClient = require('mongodb').MongoClient
+// let MyDatabase = `mongodb+srv://ifti891:Kalsi0810@cluster0.hnviy5s.mongodb.net/?retryWrites=true&w=majority`
 
+const MongoClient = require('mongodb').MongoClient
+let myMongoDbUrl = 'mongodb+srv://ifti891:Kalsi0810@cluster0.hnviy5s.mongodb.net/?retryWrites=true&w=majority'
+
+// Make sure you place body-praser before your CRUD handlers!
+
+app.use(bodyParser.urlencoded({extended: true}))
 
 // create a server that browser can connect. we do it by using Express 'listen' method
 
@@ -16,14 +25,32 @@ app.get('/', function(req, res) {
   res.send('Hello World');
 })
 */
-
+// This is how Express handles a GET request (READ operation)
 app.get('/',(req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
 
-console.log("May Node be with you")
+// CREATE operation if they send POST request to the server
+
+app.post('/quotes', (req, res) => {
+  console.log(req.body)
+})
+
+// console.log("May Node be with you")
 
 
+// connection to database aka `Mongodb` 
+
+// MongoClient.connect('MyDatabase', (err, client) => {
+//   // do something
+//   if(err) return console.error(err)
+//   console.log('connected to Database')
+// })
+
+MongoClient.connect(myMongoDbUrl, (err, client) => {
+  if(err) return console.error(err)
+  console.log('Connected to Database')
+})
 
 // const express = require("express");
 // const bodyParser = require("body-parser");
