@@ -86,7 +86,7 @@ app.get('/',(req, res) => {
   // const cursor = db.collection('quotes').find().toArray()
   db.collection('quotes').find().toArray()
   .then(results => {
-    console.log(results)
+    // console.log(results)
 
     res.render('index.ejs', { quotes: results })
   })
