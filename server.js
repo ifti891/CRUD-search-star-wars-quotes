@@ -10,13 +10,14 @@ let myMongoDbUrl = 'mongodb+srv://ifti891:Kalsi0810@cluster0.hnviy5s.mongodb.net
 
 // Make sure you place body-praser before your CRUD handlers!
 
-app.use(bodyParser.urlencoded({extended: true}))
+// app.use(bodyParser.urlencoded({extended: true}))
 
 // create a server that browser can connect. we do it by using Express 'listen' method
 
-app.listen(3000, function() {
-  console.log('listeing on 3000')
-})
+
+// app.listen(3000, function() {
+//   console.log('listeing on 3000')
+// })
 
 // In Express, we handle a GET request with the get method:
 
@@ -26,15 +27,15 @@ app.get('/', function(req, res) {
 })
 */
 // This is how Express handles a GET request (READ operation)
-app.get('/',(req, res) => {
-  res.sendFile(__dirname + '/index.html')
-})
+// app.get('/',(req, res) => {
+//   res.sendFile(__dirname + '/index.html')
+// })
 
 // CREATE operation if they send POST request to the server
 
-app.post('/quotes', (req, res) => {
-  console.log(req.body)
-})
+// app.post('/quotes', (req, res) => {
+//   console.log(req.body)
+// })
 
 // console.log("May Node be with you")
 
@@ -47,10 +48,59 @@ app.post('/quotes', (req, res) => {
 //   console.log('connected to Database')
 // })
 
+/*
 MongoClient.connect(myMongoDbUrl, (err, client) => {
   if(err) return console.error(err)
   console.log('Connected to Database')
 })
+*/
+
+// Mongo promise of the above instead of callback
+
+/*
+MongoClient.connect(myMongoDbUrl, {useUnifiedTopology: true})
+.then(client => {
+  console.log('Connected to Database')
+})
+.catch(error => console.error(error))
+*/
+
+// changing the database and promise instead of callback and putting all the express request handlers into MongoClients
+
+MongoClient.connect(myMongoDbUrl, {useUnifiedTopology: true})
+.then(client => {
+  console.log('Connected to Database')
+
+const db = client.db("invader-zim-quotes")
+
+// collections (can name anything tho.)
+const quotesCollection = db.collection('quotes')
+
+app.use(bodyParser.urlencoded({extended: true}))
+
+app.get('/',(req, res) => {
+  res.sendFile(__dirname + '/index.html')
+})
+
+app.post('/quotes', (req, res) => {
+
+  //insertOne method
+  quotesCollection.insertOne(req.body)
+  .then (result => {
+    console.log(result)
+    res.redirect('/')
+  })
+  .catch(error => console.error)
+})
+
+
+app.listen(3000, function() {
+  console.log('listening on 3000')
+})
+})
+.catch(console.error)
+
+
 
 // const express = require("express");
 // const bodyParser = require("body-parser");
