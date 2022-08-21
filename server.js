@@ -76,10 +76,17 @@ const db = client.db("invader-zim-quotes")
 // collections (can name anything tho.)
 const quotesCollection = db.collection('quotes')
 
+app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('/',(req, res) => {
   res.sendFile(__dirname + '/index.html')
+  // const cursor = db.collection('quotes').find().toArray()
+  db.collection('quotes').find().toArray()
+  .then(results => {
+    console.log(results)
+  })
+  // console.log(cursor)
 })
 
 app.post('/quotes', (req, res) => {
